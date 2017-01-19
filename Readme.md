@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Nikolay Solodukhin](https://up.htmlacademy.ru/javascript/8/user/138404).
-* Наставник: [Nikolay Solodukhin](https://up.htmlacademy.ru/javascript/8/user/138404).
+* Наставник: [Nikolay Solodukhin]((https://up.htmlacademy.ru/javascript/8/user/138404).
 
 ---
 
