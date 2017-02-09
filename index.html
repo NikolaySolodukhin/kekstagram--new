@@ -27,9 +27,9 @@
     <button class="upload-submit upload-control" type="submit"></button>
   </form>
 
-  <div class="upload-overlay invisible">
+  <div class="upload-overlay invisible" role="dialog" aria-labelledby="Редактирование фотографии">
     <form class="upload-form upload-filter" id="upload-filter" method="post" enctype="multipart/form-data">
-      <fieldset class="upload-resize-controls">
+      <fieldset class="upload-resize-controls" role="radiogroup" aria-label="Фильтры">
         <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec" tabindex="1">–</button><!--
         --><input type="text" class="upload-resize-control upload-resize-controls-value" value="55%" readonly/><!--
         --><button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc" tabindex="2">+</button>
@@ -48,37 +48,37 @@
         </div>
 
         <input type="radio" name="upload-filter" id="upload-filter-none" value="none" checked>
-        <label class="upload-filter-label" for="upload-filter-none" tabindex="3" role="radio" aria-checked="false">
+        <label class="upload-filter-label" for="upload-filter-none" tabindex="3" role="radio" aria-checked="false" aria-label="Оригинал">
           <div class="upload-filter-preview"></div>
           Оригинал
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-chrome" value="chrome">
-        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome" tabindex="4" role="radio" aria-checked="false">
+        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome" tabindex="4" role="radio" aria-checked="false" aria-label="Хром">
           <div class="upload-filter-preview"></div>
           Хром
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-sepia" value="sepia">
-        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia" tabindex="5" role="radio" aria-checked="false">
+        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia" tabindex="5" role="radio" aria-checked="false" aria-label="Сепия">
           <div class="upload-filter-preview"></div>
           Сепия
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-marvin" value="marvin">
-        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin" tabindex="6" role="radio" aria-checked="false">
+        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin" tabindex="6" role="radio" aria-checked="false" aria-label="Марвин">
           <div class="upload-filter-preview"></div>
           Марвин
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-phobos" value="phobos">
-        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos" tabindex="8" role="radio" aria-checked="false">
+        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos" tabindex="8" role="radio" aria-checked="false" aria-label="Фобос">
           <div class="upload-filter-preview"></div>
           Фобос
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-heat" value="heat">
-        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat" tabindex="9" role="radio" aria-checked="false">
+        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat" tabindex="9" role="radio" aria-checked="false" aria-label="Зной">
           <div class="upload-filter-preview"></div>
           Зной
         </label>
@@ -86,8 +86,8 @@
 
       <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..." tabindex="10"></textarea>
 
-      <button class="upload-form-cancel" type="reset" id="upload-cancel" tabindex="12"></button>
-      <button class="upload-form-submit" type="submit" id="upload-submit" tabindex="11">Отправить</button>
+      <button class="upload-form-cancel" type="reset" id="upload-cancel" tabindex="12" aria-label="Отмена"></button>
+      <button class="upload-form-submit" type="submit" id="upload-submit" tabindex="11" aria-label="Отправить">Отправить</button>
     </form>
   </div>
 
@@ -134,6 +134,10 @@
     </span>
   </a>
 </template>
+
+ <script src="js/initialize-filters.js"></script>
+ <script src="js/initialize-scale.js"></script>
  <script src="js/form.js"></script>
+
 </body>
 </html>
