@@ -4,7 +4,6 @@
 window.initializeFilters = (function () {
   return function () {
     var uploadFilterControls = document.querySelector('.upload-filter-controls');
-    var filterImage = document.querySelector('.filter-image-preview');
 
     var KEY_CODE = {
       'ENTER': 13
@@ -27,7 +26,7 @@ window.initializeFilters = (function () {
         return item.checked;
       })[0].value;
 
-      filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
+      window.filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
     };
 
     uploadFilterControls.addEventListener('click', function (evt) {
