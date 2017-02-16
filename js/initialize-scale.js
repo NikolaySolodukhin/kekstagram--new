@@ -1,11 +1,10 @@
 'use strict';
 
 window.createScale = (function () {
-  return function (element, resizeStep, resizeInitialValue) {
+  return function (element, resizeStep, resizeInitialValue, filterImageStyle) {
 
     var buttonInc = element.parentNode.querySelector('.upload-resize-controls-button-inc');
     var buttonDec = element.parentNode.querySelector('.upload-resize-controls-button-dec');
-    var filterImage = document.querySelector('.filter-image-preview');
 
     element.value = resizeInitialValue + '%';
 
@@ -23,8 +22,9 @@ window.createScale = (function () {
 
     var changeValue = function (step) {
       element.value = (parseInt(element.value, 10) + step) + '%';
-      filterImage.style.transform = 'scale(' + parseInt(element.value, 10) / resizeInitialValue + ')';
-      filterImage.style.transition = 'all .4s cubic-bezier(.65, .05, .36, 1)';
+      if (typeof filterImageStyle === 'function') {
+        filterImageStyle(element.value, resizeInitialValue);
+      }
     };
   };
 })();
