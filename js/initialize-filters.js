@@ -5,10 +5,6 @@ window.initializeFilters = (function () {
   return function () {
     var uploadFilterControls = document.querySelector('.upload-filter-controls');
 
-    var KEY_CODE = {
-      'ENTER': 13
-    };
-
     var changeFilterValue = function () {
       var filterMap;
       if (!filterMap) {
@@ -34,21 +30,31 @@ window.initializeFilters = (function () {
     });
 
     uploadFilterControls.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === KEY_CODE.ENTER) {
+      if (window.utils.isEnterPressed(evt)) {
         filterChangerEnter(evt);
       }
     });
 
     var filterChangerClick = function (evt) {
       if (evt.target.parentNode.classList[0] === 'upload-filter-label') {
-        evt.target.parentNode.control.checked = true;
+          // Поддержка Edge
+        if (evt.target.parentNode.control) {
+          evt.target.parentNode.control.checked = true;
+        } else {
+          evt.target.parentNode.previousElementSibling.checked = true;
+        }
         changeFilterValue();
         changeAriaChecked(evt);
       }
     };
 
     var filterChangerEnter = function (evt) {
-      evt.target.control.checked = true;
+      // Поддержка Edge
+      if (evt.target.control) {
+        evt.target.control.checked = true;
+      } else {
+        evt.target.previousElementSibling.checked = true;
+      }
       changeFilterValue();
       changeAriaChecked(evt);
     };
@@ -58,9 +64,10 @@ window.initializeFilters = (function () {
       for (var i = 0; i < labelElements.length; i++) {
         labelElements[i].attributes['aria-checked'].nodeValue = false;
       }
-      if (evt.type === 'click') {
+      if (window.utils.isClicked(evt)) {
         evt.target.parentNode.attributes['aria-checked'].nodeValue = true;
-      } else if (evt.keyCode === KEY_CODE.ENTER) {
+      } else if (window.utils.isEnterPressed(evt)) {
+        evt.preventDefault();
         evt.target.attributes['aria-checked'].nodeValue = true;
       }
     };

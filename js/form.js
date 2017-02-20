@@ -7,13 +7,12 @@ window.form = (function () {
   var uploadOverlay = document.querySelector('.upload-overlay');
   var uploadFormCancel = uploadOverlay.querySelector('.upload-form-cancel');
   var uploadFromBtn = uploadForm.querySelector('.upload-file');
+
+  uploadFromBtn.focus();
+
   window.filterImage = uploadOverlay.querySelector('.filter-image-preview');
 
   var activeElement;
-
-  var KEY_CODE = {
-    'ENTER': 13
-  };
 
   var showUploadElement = function () {
     uploadOverlay.classList.remove('invisible');
@@ -23,13 +22,13 @@ window.form = (function () {
   var closeUploadElement = function (callback, evt) {
     uploadOverlay.classList.add('invisible');
     uploadForm.classList.remove('invisible');
-    if (typeof callback === 'function' && evt.keyCode === KEY_CODE.ENTER) {
+    if (typeof callback === 'function' && window.utils.isEnterPressed(evt)) {
       callback();
     }
   };
 
   uploadFromBtn.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === KEY_CODE.ENTER) {
+    if (window.utils.isEnterPressed(evt)) {
       activeElement = document.activeElement;
       activeElement.click();
     }
@@ -63,4 +62,4 @@ window.form = (function () {
 })();
 
 window.initializeFilters();
-window.createScale(document.querySelector('.upload-resize-controls-value'), 25, 100, window.form.setScale);
+window.createScale(document.querySelector('.upload-resize-controls-value'), window.utils.getScaleStep(), window.utils.getScaleDefault(), window.form.setScale);
