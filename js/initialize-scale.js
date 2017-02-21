@@ -20,6 +20,10 @@ window.createScale = (function () {
       }
     });
 
+    /**
+     *
+     * @param {Number} step
+     */
     var changeValue = function (step) {
       element.value = (parseInt(element.value, 10) + step) + '%';
       if (typeof filterImageStyle === 'function') {

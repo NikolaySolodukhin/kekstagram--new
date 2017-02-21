@@ -2,8 +2,12 @@
 
 window.load = (function () {
 
+  /**
+   *
+   * @param {Object} err
+   */
   var errorHandler = function (err) {
-    document.body.insertAdjacentHTML('afterBegin', '<span>Their destroying our city!</span>');
+    document.body.insertAdjacentHTML('afterBegin', '<span><b>' + err + '</b> destroying our project!</span>');
   };
 
 /**
@@ -14,7 +18,7 @@ window.load = (function () {
   return function (url, onLoad) {
     var xhr = new XMLHttpRequest();
     xhr.timeout = 50000;
-    xhr.open('GET', url);
+    xhr.open('GET', url, true);
 
     xhr.addEventListener('error', errorHandler);
     xhr.addEventListener('timeout', errorHandler);

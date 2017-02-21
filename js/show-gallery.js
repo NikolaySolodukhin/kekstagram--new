@@ -11,13 +11,17 @@ window.showGallery = (function () {
   var galleryCloseBtn = document.querySelector('.gallery-overlay-close');
 
   return function (currentElement, miniElement) {
-
+    /**
+     *
+     * @param {Object} evt
+     */
     var closeGallery = function (evt) {
-      if (window.utils.isEnterPressed(evt) || window.utils.isClicked(evt)) {
+      if (window.utils.isEnterPressed(evt) || window.utils.isClicked(evt) || window.utils.isEscapePressed(evt)) {
         evt.preventDefault();
         gallery.classList.add('invisible');
         galleryCloseBtn.removeEventListener('click', closeGallery);
         galleryCloseBtn.removeEventListener('keydown', closeGallery);
+        window.removeEventListener('keydown', closeGalleryEscapeHandler);
         miniElement.focus();
       }
     };
@@ -40,6 +44,16 @@ window.showGallery = (function () {
     galleryCloseBtn.addEventListener('keydown', function (evt) {
       closeGallery(evt);
     });
+
+    window.addEventListener('keydown', function (evt) {
+      closeGalleryEscapeHandler(evt);
+    });
+
+    var closeGalleryEscapeHandler = function (evt) {
+      if (window.utils.isEscapePressed(evt)) {
+        closeGallery(evt);
+      }
+    };
 
   };
 
