@@ -1,6 +1,7 @@
 'use strict';
 
 window.form = (function () {
+   // переменные
   var uploadForm = document.forms['upload-select-image'];
   var uploadFile = uploadForm['upload-file'];
 

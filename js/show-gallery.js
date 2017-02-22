@@ -12,7 +12,7 @@ window.showGallery = (function () {
 
   return function (currentElement, miniElement) {
     /**
-     *
+     * Закрывает галерею. Удаляет обработчики и ставит фокус на закрытой фотографии.
      * @param {Object} evt
      */
     var closeGallery = function (evt) {
