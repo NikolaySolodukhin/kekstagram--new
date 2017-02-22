@@ -44,7 +44,7 @@ window.utils = (function () {
     clearContainer: function () {
       this.getContainer().innerHTML = '';
     },
-
+// возвращает массив из NUMBER_OF_NEW_IMAGES элементов, содержащий случайные неповторяющиеся индексы элементов принятой на вход структуры данных
     getRandomIndexes: function (arr) {
       var randomIndex = Math.floor(Math.random() * arr.length);
       var randomIndexes = [randomIndex];
@@ -59,6 +59,7 @@ window.utils = (function () {
       return randomIndexes;
     },
 
+ // помещает элемент в контейнер
     renderMiniPictures: function (element) {
       this.getContainer().appendChild(element);
     },
