@@ -4,9 +4,6 @@ window.sortPictures = (function () {
 
    // переменные
   var filters = document.querySelector('.filters');
-  var filterPopular = filters.querySelector('#filter-popular');
-  var filterNew = filters.querySelector('#filter-new');
-  var filterDiscussed = filters.querySelector('#filter-discussed');
 
   filters.classList.remove('hidden');
 
@@ -44,9 +41,26 @@ window.sortPictures = (function () {
       });
     };
 
-     // развешиваем обработчики
-    filterPopular.addEventListener('click', popularHandler);
-    filterNew.addEventListener('click', newHandler);
-    filterDiscussed.addEventListener('click', discussedHandler);
+// Используем делегирование для фильтров
+    var handler = function (evt) {
+      var currentFilterHtmlFor = evt.target.htmlFor;
+      switch (currentFilterHtmlFor) {
+        case ('filter-new'):
+          newHandler();
+          break;
+        case ('filter-discussed'):
+          discussedHandler();
+          break;
+        case ('filter-popular'):
+          popularHandler();
+          break;
+      }
+
+    };
+
+// вешаем обработчик
+    filters.addEventListener('click', function (evt) {
+      handler(evt);
+    });
   };
 })();

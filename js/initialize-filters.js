@@ -6,6 +6,7 @@ window.initializeFilters = (function () {
     var uploadFilterControls = document.querySelector('.upload-filter-controls');
     var filterMap;
 
+
     /**
      * Функция изменения фильтра. Добавляет класс из filterMap соответствующий
      * выбранному значению в форме.
@@ -46,12 +47,13 @@ window.initializeFilters = (function () {
     });
 
     var filterChangerClick = function (evt) {
-      if (evt.target.parentNode.classList[0] === 'upload-filter-label') {
+      var currentFilterLabel = evt.target.parentNode;
+      if (currentFilterLabel.classList.contains('upload-filter-label')) {
           // Поддержка Edge
-        if (evt.target.parentNode.control) {
-          evt.target.parentNode.control.checked = true;
+        if (currentFilterLabel.control) {
+          currentFilterLabel.control.checked = true;
         } else {
-          evt.target.parentNode.previousElementSibling.checked = true;
+          currentFilterLabel.previousElementSibling.checked = true;
         }
         changeFilterValue();
         changeAriaChecked(evt);
@@ -59,11 +61,12 @@ window.initializeFilters = (function () {
     };
 
     var filterChangerEnter = function (evt) {
+      var currentFilter = evt.target;
       // Поддержка Edge
-      if (evt.target.control) {
-        evt.target.control.checked = true;
+      if (currentFilter.control) {
+        currentFilter.control.checked = true;
       } else {
-        evt.target.previousElementSibling.checked = true;
+        currentFilter.previousElementSibling.checked = true;
       }
       changeFilterValue();
       changeAriaChecked(evt);
