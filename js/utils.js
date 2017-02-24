@@ -14,6 +14,7 @@ window.utils = (function () {
 
   var NUMBER_OF_NEW_IMAGES = 10;
   var picturesContainer = document.querySelector('.pictures');
+  var filterLevelBox = document.querySelector('.upload-filter-level');
 
   return {
 
@@ -92,5 +93,40 @@ window.utils = (function () {
       picture.addEventListener('keydown', setMiniImageHandler);
       return picture;
     },
+
+// функция-обработчик: показывает ползунок в случае если выбран фильтр
+    switchFilterDisplay: function (value) {
+      filterLevelBox.style.display = value !== 'none' ? 'block' : 'none';
+    },
+
+// функция-обработчик: изменяет значение CSS фильтров в соотвествии изменения ползунка
+    onValueChanged: function (filterName, currentFilterAmount) {
+      var picture = document.querySelector('.filter-image-preview');
+      var DEFAULT_VALUE = 0.75;
+      var NORMALIZE_VALUE = currentFilterAmount / DEFAULT_VALUE;
+      switch (filterName) {
+        case 'filter-none':
+          picture.style.filter = '';
+          break;
+        case 'filter-chrome':
+          picture.style.filter = 'grayscale(' + NORMALIZE_VALUE + ')';
+          break;
+        case 'filter-sepia':
+          picture.style.filter = 'sepia(' + NORMALIZE_VALUE + ')';
+          break;
+        case 'filter-marvin':
+          picture.style.filter = 'invert(' + (NORMALIZE_VALUE) * 100 + '%' + ')';
+          break;
+        case 'filter-phobos':
+          picture.style.filter = 'contrast(' + NORMALIZE_VALUE * 2 + ')' + 'saturate(' + NORMALIZE_VALUE * 5 + ')' + 'hue-rotate(' + (NORMALIZE_VALUE * -180) + 'deg)';
+          break;
+        case 'filter-heat':
+          picture.style.filter = 'contrast(' + NORMALIZE_VALUE * 1.1 + ')' + 'brightness(' + NORMALIZE_VALUE * 1.3 + ')' + 'saturate(' + (NORMALIZE_VALUE * 2.4) + ')' + 'sepia(' + NORMALIZE_VALUE * 0.4 + ')';
+          break;
+        default:
+          picture.style.filter = '';
+          break;
+      }
+    }
   };
 })();

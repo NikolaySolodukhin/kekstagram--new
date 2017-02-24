@@ -30,6 +30,9 @@ window.initializeFilters = (function () {
         return item.checked;
       })[0].value;
 
+      // Передает выбранный фильтр для включения/выключения ползунка изменения CSS фильтров
+      window.utils.switchFilterDisplay(selectedFilter);
+      window.initializeSaturate(filterMap[selectedFilter]);
       // Класс перезаписывается, а не обновляется через classList потому что нужно
       // убрать предыдущий примененный класс. Для этого нужно или запоминать его
       // состояние или просто перезаписывать.
