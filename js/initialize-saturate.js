@@ -45,10 +45,6 @@ window.initializeSaturate = (function () {
       return false;
     };
 
-    filterPin.ondragstart = function () {
-      return false;
-    };
-
     function getCoords(elem) {
       var box = elem.getBoundingClientRect();
 
