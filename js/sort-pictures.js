@@ -2,14 +2,14 @@
 
 window.sortPictures = (function () {
 
-   // переменные
+  // переменные
   var filters = document.querySelector('.filters');
 
   filters.classList.remove('hidden');
 
   return function (picturesDataStructure) {
 
-     // функция-обработчик популярных фото
+    // функция-обработчик популярных фото
     var popularHandler = function () {
       window.utils.clearContainer();
       picturesDataStructure.forEach(function (elem, i) {
@@ -17,7 +17,7 @@ window.sortPictures = (function () {
       });
     };
 
-     // функция-обработчик новых фото
+    // функция-обработчик новых фото
     var newHandler = function () {
       window.utils.clearContainer();
       var randomIndexArray = window.utils.getRandomIndexes(picturesDataStructure);
@@ -27,7 +27,7 @@ window.sortPictures = (function () {
 
     };
 
-     // функция-обработчик обсуждаемых фото
+    // функция-обработчик обсуждаемых фото
     var discussedHandler = function () {
       window.utils.clearContainer();
       var discussedPictures = picturesDataStructure.slice();
@@ -41,7 +41,7 @@ window.sortPictures = (function () {
       });
     };
 
-// Используем делегирование для фильтров
+      // Используем делегирование для фильтров
     var handler = function (evt) {
       var currentFilterHtmlFor = evt.target.htmlFor;
       switch (currentFilterHtmlFor) {
@@ -58,7 +58,7 @@ window.sortPictures = (function () {
 
     };
 
-// вешаем обработчик
+    // вешаем обработчик
     filters.addEventListener('click', function (evt) {
       handler(evt);
     });

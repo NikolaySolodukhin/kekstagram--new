@@ -45,7 +45,7 @@ window.utils = (function () {
     clearContainer: function () {
       this.getContainer().innerHTML = '';
     },
-// возвращает массив из NUMBER_OF_NEW_IMAGES элементов, содержащий случайные неповторяющиеся индексы элементов принятой на вход структуры данных
+    // возвращает массив из NUMBER_OF_NEW_IMAGES элементов, содержащий случайные неповторяющиеся индексы элементов принятой на вход структуры данных
     getRandomIndexes: function (arr) {
       var randomIndex = Math.floor(Math.random() * arr.length);
       var randomIndexes = [randomIndex];
@@ -60,13 +60,13 @@ window.utils = (function () {
       return randomIndexes;
     },
 
- // помещает элемент в контейнер
+    // помещает элемент в контейнер
     renderMiniPictures: function (element) {
       this.getContainer().appendChild(element);
     },
 
 
-// получаем ноду из элемента массива с данными, вешаем обработчики
+    // получаем ноду из элемента массива с данными, вешаем обработчики
     getNodeFromData: function (pictureData) {
       var template = document.getElementById('picture-template');
       var templateContainer = 'content' in template ? template.content : template;
@@ -94,12 +94,12 @@ window.utils = (function () {
       return picture;
     },
 
-// функция-обработчик: показывает ползунок в случае если выбран фильтр
+    // функция-обработчик: показывает ползунок в случае если выбран фильтр
     switchFilterDisplay: function (value) {
       filterLevelBox.style.display = value !== 'none' ? 'block' : 'none';
     },
 
-// функция-обработчик: изменяет значение CSS фильтров в соотвествии изменения ползунка
+    // функция-обработчик: изменяет значение CSS фильтров в соотвествии изменения ползунка
     onValueChanged: function (filterName, currentFilterAmount) {
       var picture = document.querySelector('.filter-image-preview');
       var DEFAULT_VALUE = 0.75;

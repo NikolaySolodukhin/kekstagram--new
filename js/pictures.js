@@ -2,7 +2,7 @@
 
 window.pictures = (function () {
 
-  var PICTURE_LOAD_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
+  var PICTURE_LOAD_URL = '../data/data.json';
   var pictures = [];
 
   /**
@@ -16,7 +16,7 @@ window.pictures = (function () {
   };
 
   var showPictures = function () {
-    pictures.forEach(function (pictureData, i) {
+    pictures.forEach(function (pictureData) {
       window.utils.renderMiniPictures(window.utils.getNodeFromData(pictureData));
     });
   };

@@ -52,7 +52,7 @@ window.initializeFilters = (function () {
     var filterChangerClick = function (evt) {
       var currentFilterLabel = evt.target.parentNode;
       if (currentFilterLabel.classList.contains('upload-filter-label')) {
-          // Поддержка Edge
+        // Поддержка Edge
         if (currentFilterLabel.control) {
           currentFilterLabel.control.checked = true;
         } else {

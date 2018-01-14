@@ -2,7 +2,7 @@
 
 window.showGallery = (function () {
 
-   // переменные
+  // переменные
   var gallery = document.querySelector('.gallery-overlay');
   var galleryPreview = gallery.querySelector('.gallery-overlay-preview');
   var galleryPreviewImage = galleryPreview.querySelector('.gallery-overlay-image');
@@ -27,16 +27,16 @@ window.showGallery = (function () {
     };
 
 
-        // показываем галерею, ставим фокус на кнопку закрытия
+    // показываем галерею, ставим фокус на кнопку закрытия
     gallery.classList.remove('invisible');
     galleryCloseBtn.focus();
 
-        // рисуем превью
+    // рисуем превью
     galleryPreviewImage.src = currentElement.url;
     galleryPreviewLikesCount.innerHTML = currentElement.likes;
     galleryPreviewCommentsCount.innerHTML = currentElement.comments.length;
 
-        // вешаем обработчики закрытия галереи
+    // вешаем обработчики закрытия галереи
     galleryCloseBtn.addEventListener('click', function (evt) {
       closeGallery(evt);
     });

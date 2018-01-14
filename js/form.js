@@ -1,7 +1,7 @@
 'use strict';
 
 window.form = (function () {
-   // переменные
+  // переменные
   var uploadForm = document.forms['upload-select-image'];
   var uploadFile = uploadForm['upload-file'];
 
@@ -9,7 +9,7 @@ window.form = (function () {
   var uploadFormCancel = uploadOverlay.querySelector('.upload-form-cancel');
   var uploadFromBtn = uploadForm.querySelector('.upload-file');
 
-// Ставим фокус при открытии страницы на кнопку загрузки изображения
+  // Ставим фокус при открытии страницы на кнопку загрузки изображения
   uploadFromBtn.focus();
 
   var FileType = {
@@ -54,7 +54,7 @@ window.form = (function () {
   uploadFile.addEventListener('change', function (evt) {
 
     // Проверка типа загружаемого файла, тип должен быть изображением
-   // одного из форматов: JPEG, PNG, GIF или SVG.
+    // одного из форматов: JPEG, PNG, GIF или SVG.
     if (fileRegExp.test(evt.target.files[0].type)) {
       showUploadElement();
     }

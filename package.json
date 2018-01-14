@@ -6,15 +6,15 @@
   "author": "Nikolay Solodukhin",
   "repository": {
     "type": "git",
-    "url": "git@github.com:htmlacademy-javascript/138404-kekstagram.git"
+    "url": "git@github.com:NikolaySolodukhin/kekstagram--new.git"
   },
   "bugs": {
-    "url": "https://github.com/htmlacademy-javascript/138404-kekstagram/issues"
+    "url": "https://github.com/NikolaySolodukhin/kekstagram--new/issues"
   },
-  "homepage": "https://github.com/htmlacademy-javascript/138404-kekstagram",
+  "homepage": "https://github.com/NikolaySolodukhin/kekstagram--new",
   "devDependencies": {
-    "eslint": "3.9.0",
-    "eslint-config-htmlacademy": "0.2.x"
+    "eslint": "4.15.0",
+    "eslint-config-htmlacademy": "0.4.x"
   },
   "dependencies": {},
   "scripts": {
@@ -22,6 +22,5 @@
   },
   "engines": {
     "node": "^6.9"
-  },
-  "openBrowser": false
+  }
 }

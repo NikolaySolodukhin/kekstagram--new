@@ -10,7 +10,7 @@ window.load = (function () {
     document.body.insertAdjacentHTML('afterBegin', '<span><b>' + err + '</b> destroying our project!</span>');
   };
 
-/**
+  /**
  * *Делает XMLHttp запрос к серверу и отдает данные в onload
  * @param {string} url
  * @param {function} onLoad
