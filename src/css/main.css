@@ -1,3 +1,36 @@
+@font-face {
+  font-weight: 700;
+  font-family: "Open Sans Condensed";
+  font-style: normal;
+  src: url("../assets/fonts/opensans-condbold.woff2") format("woff2"), url("../assets/fonts/opensans-condbold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: "Open Sans Condensed";
+  font-style: normal;
+  src: url("../assets/fonts/opensans-condlight.woff2") format("woff2"), url("../assets/fonts/opensans-condlight.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: normal;
+  font-family: "Open Sans";
+  font-style: normal;
+  src: url("../assets/fonts/opensans.woff2") format("woff2"), url("../assets/fonts/opensans.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  --color-yellow: #ffe753;
+  --bg-color-black: #232321;
+  --border-grey-color: #dddddd;
+  --color-red-error: #e16567;
+  --set-open-sans-font-family: "Open Sans", Arial, sans-serif;
+  --set-open-condensed-font-family: "Open Sans Condensed", Arial, sans-serif;
+}
+
 html,
 body {
   margin: 0;
@@ -7,11 +40,11 @@ body {
 html {
   min-height: 100%;
 
-  background: #232321;
+  background-color: #232321;
 }
 
 html.inline-element {
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 body {
@@ -19,8 +52,9 @@ body {
 
   min-width: 980px;
   min-height: 900px;
+  font-size: 14px;
 
-  font: 14px "Open Sans", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   color: #ffe753;
 }
 
@@ -55,10 +89,10 @@ body {
 }
 
 .filters-radio:checked + .filters-item {
-  color: #000000;
+  color: black;
   text-decoration: none;
 
-  background: #ffffff;
+  background-color: white;
   border-radius: 2px;
 }
 
@@ -72,7 +106,9 @@ body {
   margin-top: 5px;
   padding: 0;
 
-  background: url("../img/logo-background-1.jpg") center;
+  background-image: url("../assets/img/logo-background-1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
   border: 0;
 }
 
@@ -88,7 +124,7 @@ body {
   padding: 60px 0;
   overflow: auto;
 
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   border: none;
 }
 
@@ -101,48 +137,46 @@ body {
   position: relative;
   z-index: 1;
 
-  background: url("../img/logo-mask.png") no-repeat center;
+  background-image: url("../assets/img/logo-mask.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .upload-filter {
   position: relative;
+  margin-right: auto;
 
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 .upload-filter-preview {
-  background-image: url("../img/upload-default-image.png");
+  background-image: url("../assets/img/upload-default-image.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .upload-filter-label-chrome .upload-filter-preview,
 .filter-chrome {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 .upload-filter-label-sepia .upload-filter-preview,
 .filter-sepia {
-  -webkit-filter: sepia(1);
-          filter: sepia(1);
+  filter: sepia(1);
 }
 
 .upload-filter-label-marvin .upload-filter-preview,
 .filter-marvin {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  filter: invert(100%);
 }
 
 .upload-filter-label-phobos .upload-filter-preview,
 .filter-phobos {
-  -webkit-filter: contrast(2) saturate(5) hue-rotate(-180deg);
-          filter: contrast(2) saturate(5) hue-rotate(-180deg);
+  filter: contrast(2) saturate(5) hue-rotate(-180deg);
 }
 .upload-filter-label-heat .upload-filter-label-heat,
 .filter-heat {
-  -webkit-filter: contrast(1.1) brightness(1.3) saturate(2.4) sepia(0.4);
-          filter: contrast(1.1) brightness(1.3) saturate(2.4) sepia(0.4);
+  filter: contrast(1.1) brightness(1.3) saturate(2.4) sepia(0.4);
 }
 
 .upload-filter-level-pin {
@@ -168,13 +202,15 @@ body {
   margin: 0;
   padding: 0;
 
-  background: url("../img/icon-photo.png") center no-repeat;
+  background-image: url("../assets/img/icon-photo.png");
+  background-repeat: no-repeat;
+  background-position: center;
   border: none;
   cursor: pointer;
 }
 
 .upload-image .upload-submit {
-  background-image: url("../img/upload-button.png");
+  background-image: url("../assets/img/upload-button.png");
 }
 
 .upload-file {
@@ -217,7 +253,10 @@ body {
   margin-left: 10px;
   padding: 0;
 
-  background: rgba(255, 255, 255, 0.2) url("../img/icon-cross.png") center no-repeat;
+  background-color: rgba(255, 255, 255, 0.2);
+  background-image: url("../assets/img/icon-cross.png");
+  background-repeat: no-repeat;
+  background-position: center;
   border: 0;
   border-radius: 2px;
 }
@@ -246,9 +285,9 @@ body {
   font: 700 20px/33px "Open Sans";
   vertical-align: top;
   text-align: center;
-  color: #ffffff;
+  color: white;
 
-  background: rgba(0, 0, 0, 0.56);
+  background-color: rgba(0, 0, 0, 0.56);
   border: 0;
 }
 
@@ -257,7 +296,7 @@ body {
 
   font-size: 16px;
 
-  border: solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-width: 0 1px;
 }
 
@@ -284,7 +323,7 @@ body {
   font-size: 12px;
   line-height: 42px;
   text-align: center;
-  color: #ffffff;
+  color: white;
   white-space: nowrap;
 
   border: 0;
@@ -307,10 +346,12 @@ body {
 .upload-filter-label {
   display: inline-block;
   margin: 0 5px;
-
-  font: 14px "Open Sans Condensed";
   font-weight: 700;
-  color: #ffffff;
+  font-size: 14px;
+
+  font-family: "Open Sans Condensed";
+  vertical-align: middle;
+  color: white;
   text-transform: uppercase;
 
   cursor: pointer;
@@ -350,7 +391,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   width: 495px;
   height: 33px;
 
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 33px;
   transform: translateX(-50%);
 }
@@ -376,7 +417,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   height: 18px;
   margin: -9px 0 0;
 
-  background: #ffe753;
+  background-color: #ffe753;
   border-radius: 50%;
   transform: translateX(-50%);
   cursor: move;
@@ -388,7 +429,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   width: 20%;
   height: 100%;
 
-  background: #ffe753;
+  background-color: #ffe753;
 }
 
 /* Описание */
@@ -398,31 +439,33 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   height: 4em;
   margin: 0 auto 30px;
   padding: 20px 10px;
+  font-size: 14px;
 
-  font: 14px "Open Sans";
+  font-family: "Open Sans";
   color: #9a9a9a;
 
   border-radius: 5px;
 }
 
 .upload-form-description:focus {
-  color: #000000;
+  color: black;
 }
 
 /* Кнопка отправки */
 .upload-form-submit {
   margin-bottom: 30px;
   padding: 0 20px;
-
-  font: 14px "Open Sans";
   font-weight: 900;
+  font-size: 14px;
   line-height: 46px;
+
+  font-family: "Open Sans";
   text-align: center;
   color: #ffe753;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 
-  background: rgba(255, 231, 82, 0.2);
+  background-color: rgba(255, 231, 82, 0.2);
   border: 0;
   border-radius: 4px;
 }
@@ -454,7 +497,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   text-align: center;
   color: #ffe753;
 
-  background: #3c3614;
+  background-color: #3c3614;
 }
 
 .upload-message a {
@@ -480,19 +523,20 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .container {
   width: 980px;
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .pictures {
   padding-bottom: 120px;
   padding-left: 12px;
 
-  font-size: 0;
+  font-size: 12px;
   text-align: left;
 }
 
-.pictures-loading:after,
-.pictures-failure:after {
+.pictures-loading::after,
+.pictures-failure::after {
   position: absolute;
   top: 260px;
   left: 50%;
@@ -505,17 +549,17 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   font-size: 30px;
   text-align: center;
-  color: #ffffff;
+  color: white;
 
-  background: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
 }
 
-.pictures-loading:after {
+.pictures-loading::after {
   content: "Загрузка...";
 }
 
-.pictures-failure:after {
+.pictures-failure::after {
   content: "Ошибка загрузки";
 }
 
@@ -529,6 +573,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   margin-right: 14px;
   margin-bottom: 14px;
   overflow: hidden;
+  vertical-align: middle;
 
   text-align: center;
 }
@@ -547,7 +592,9 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .picture-load-failure {
   line-height: 182px;
 
-  background: url("../img/icon-cross.png") no-repeat center;
+  background-image: url("../assets/img/icon-cross.png");
+  background-repeat: no-repeat;
+  background-position: center;
   border: solid 1px rgba(255, 255, 255, 0.2);
   opacity: 0.3;
 }
@@ -563,14 +610,15 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   padding: 0 10px;
 
   line-height: 24px;
-  color: #ffffff;
+  color: white;
 
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 2px;
 }
 
 .picture:hover .picture-stats {
   display: inline-block;
+  vertical-align: middle;
 }
 
 .picture-load-failure .picture-stats {
@@ -591,7 +639,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   vertical-align: middle;
 }
 
-.picture-stat:before {
+.picture-stat::before {
   content: "";
   position: relative;
   top: -1px;
@@ -601,17 +649,19 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   vertical-align: middle;
 
-  background: url("../img/image-icons-sprite.png") no-repeat 0 0;
+  background-image: url("../assets/img/image-icons-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
 }
 
-.picture-comments:before {
+.picture-comments::before {
   width: 20px;
   height: 16px;
 
   background-position: 0 0;
 }
 
-.picture-likes:before {
+.picture-likes::before {
   width: 19px;
   height: 15px;
 
@@ -646,7 +696,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   text-align: center;
 
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .gallery-overlay-close {
@@ -658,7 +708,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   font-size: 45px;
   text-align: center;
-  color: #ffffff;
+  color: white;
 
   cursor: pointer;
 }
@@ -666,8 +716,9 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .gallery-overlay-preview {
   display: inline-block;
   margin: 30px 0;
+  vertical-align: middle;
 
-  background: #ffffff;
+  background-color: white;
 }
 
 .gallery-overlay-image[src=""] {
@@ -682,7 +733,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .gallery-overlay-controls {
   font-weight: bold;
   font-size: 14px;
-  color: #000000;
+  color: black;
 }
 
 .gallery-overlay-controls-comments,
@@ -709,7 +760,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   cursor: pointer;
 }
 
-.likes-count:before {
+.likes-count::before {
   content: "";
 
   display: inline-block;
@@ -719,11 +770,13 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   vertical-align: middle;
 
-  background: url("../img/icon-heart-sprite.gif") no-repeat 0 0;
+  background-image: url("../assets/img/icon-heart-sprite.gif");
+  background-repeat: no-repeat;
+  background-position: 0 0;
   cursor: pointer;
 }
 
-.likes-count-liked:before {
+.likes-count-liked::before {
   background-position-x: -18px;
 }
 
@@ -739,7 +792,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
   font-size: 12px;
   font-family: Roboto, Arial, sans-serif;
-  color: #ffffff;
+  color: white;
 
   border-top: solid 1px #cccccc;
 }
@@ -750,7 +803,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 }
 
 .footer a {
-  color: #ffffff;
+  color: white;
 }
 
 .footer-logo,
@@ -791,15 +844,14 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   vertical-align: top;
   text-indent: -1999em;
 
-  background: url("../img/social-sprite.png") no-repeat;
+  background-image: url("../assets/img/social-sprite.png");
+  background-repeat: no-repeat;
   opacity: 0.6;
 }
 
 .footer-social-item:hover {
   opacity: 1;
 }
-
-
 
 .footer-social-item-instagram {
   background-position: -28px 0;
