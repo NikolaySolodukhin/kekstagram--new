@@ -1,4 +1,3 @@
-build/
 node_modules/
 .DS_Store
 Thumbs.db
@@ -10,3 +9,13 @@ Thumbs.db
 *.pdf
 yarn.lock
 npm-debug.log*
+src/
+static/
+webpack.config.js
+postcss.config.js
+.babelrc
+.browserslistrc
+.editorconfig
+Readme.md
+.travis.yml
+package.json
