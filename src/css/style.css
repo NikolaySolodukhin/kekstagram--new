@@ -1,0 +1,14 @@
+@import 'variables.css';
+@import 'reset.css';
+@import "fonts.css";
+@import "container.css";
+@import "main.css";
+@import "filters.css";
+@import "upload-filter.css";
+@import "upload-form.css";
+@import "upload-resize.css";
+@import "pictures.css";
+@import "picture.css";
+@import "gallery.css";
+@import "footer.css";
+@import "social.css";

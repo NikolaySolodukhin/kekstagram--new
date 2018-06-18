@@ -1,6 +1,7 @@
 'use strict';
 
-import showGallery from './show-gallery';
+import Gallery from './show-gallery';
+import initialSaturated from './initialize-saturate';
 
 class Utils {
   constructor() {
@@ -16,7 +17,7 @@ class Utils {
 
     this.NUMBER_OF_NEW_IMAGES = 10;
     this.picturesContainer = document.querySelector('.pictures');
-    this.filterLevelBox = document.querySelector('.upload-filter-level');
+    this.filterLevelBox = document.querySelector('.upload-filter__level');
     this.pictureFragmentContainer = document.createDocumentFragment();
   }
 
@@ -30,6 +31,10 @@ class Utils {
 
   isEscapePressed(evt) {
     return evt.keyCode && evt.keyCode === this.KEY_CODE.ESCAPE;
+  }
+
+  isClickedOrIsEnterPressed(evt) {
+    return this.isEnterPressed(evt) || this.isClicked(evt);
   }
 
   getContainer() {
@@ -69,10 +74,11 @@ class Utils {
       'content' in template ? template.content : template;
     const picture = templateContainer.querySelector('.picture').cloneNode(true);
     picture.tabindex = '0';
-    const pictureImg = picture.querySelector('img');
+    const pictureImg = picture.querySelector('.picture__img');
 
-    picture.querySelector('.picture-likes').innerHTML = pictureData.likes;
-    picture.querySelector('.picture-comments').innerHTML = pictureData.comments;
+    picture.querySelector('.picture__likes').innerHTML = pictureData.likes;
+    picture.querySelector('.picture__comments').innerHTML =
+      pictureData.comments;
     pictureImg.src = require(`../assets/${pictureData.url}`);
     pictureImg.alt = 'Photo from gallery';
 
@@ -80,7 +86,8 @@ class Utils {
     const setMiniImageHandler = evt => {
       if (this.isEnterPressed(evt) || this.isClicked(evt)) {
         evt.preventDefault();
-        showGallery(pictureData, picture);
+        Gallery.show(pictureData, picture);
+        Gallery.setFocusOncloseButton();
       }
     };
 
@@ -90,62 +97,60 @@ class Utils {
   }
 
   // функция-обработчик: показывает ползунок в случае если выбран фильтр
-  switchFilterDisplay() {
-    return value =>
-      (this.filterLevelBox.style.display = value !== 'none' ? 'block' : 'none');
+  switchFilterDisplay(value) {
+    this.filterLevelBox.style.display = value !== 'none' ? 'block' : 'none';
+    initialSaturated.init();
   }
 
   // функция-обработчик: изменяет значение CSS фильтров в соотвествии изменения ползунка
-  onValueChanged() {
-    return (filterName, currentFilterAmount) => {
-      const picture = document.querySelector('.filter-image-preview');
-      const DEFAULT_VALUE = 0.75;
-      const NORMALIZE_VALUE = currentFilterAmount / DEFAULT_VALUE;
-      switch (filterName) {
-        case 'filter-none':
-          picture.style.filter = '';
-          break;
-        case 'filter-chrome':
-          picture.style.filter = 'grayscale(' + NORMALIZE_VALUE + ')';
-          break;
-        case 'filter-sepia':
-          picture.style.filter = 'sepia(' + NORMALIZE_VALUE + ')';
-          break;
-        case 'filter-marvin':
-          picture.style.filter = 'invert(' + NORMALIZE_VALUE * 100 + '%' + ')';
-          break;
-        case 'filter-phobos':
-          picture.style.filter =
-            'contrast(' +
-            NORMALIZE_VALUE * 2 +
-            ')' +
-            'saturate(' +
-            NORMALIZE_VALUE * 5 +
-            ')' +
-            'hue-rotate(' +
-            NORMALIZE_VALUE * -180 +
-            'deg)';
-          break;
-        case 'filter-heat':
-          picture.style.filter =
-            'contrast(' +
-            NORMALIZE_VALUE * 1.1 +
-            ')' +
-            'brightness(' +
-            NORMALIZE_VALUE * 1.3 +
-            ')' +
-            'saturate(' +
-            NORMALIZE_VALUE * 2.4 +
-            ')' +
-            'sepia(' +
-            NORMALIZE_VALUE * 0.4 +
-            ')';
-          break;
-        default:
-          picture.style.filter = '';
-          break;
-      }
-    };
+  onValueChanged(filterName, currentFilterAmount) {
+    const picture = document.querySelector('.filter-image-preview');
+    const DEFAULT_VALUE = 0.75;
+    const NORMALIZE_VALUE = currentFilterAmount / DEFAULT_VALUE;
+    switch (filterName) {
+      case 'filter-none':
+        picture.style.filter = '';
+        break;
+      case 'filter-chrome':
+        picture.style.filter = 'grayscale(' + NORMALIZE_VALUE + ')';
+        break;
+      case 'filter-sepia':
+        picture.style.filter = 'sepia(' + NORMALIZE_VALUE + ')';
+        break;
+      case 'filter-marvin':
+        picture.style.filter = 'invert(' + NORMALIZE_VALUE * 100 + '%' + ')';
+        break;
+      case 'filter-phobos':
+        picture.style.filter =
+          'contrast(' +
+          NORMALIZE_VALUE * 2 +
+          ')' +
+          'saturate(' +
+          NORMALIZE_VALUE * 5 +
+          ')' +
+          'hue-rotate(' +
+          NORMALIZE_VALUE * -180 +
+          'deg)';
+        break;
+      case 'filter-heat':
+        picture.style.filter =
+          'contrast(' +
+          NORMALIZE_VALUE * 1.1 +
+          ')' +
+          'brightness(' +
+          NORMALIZE_VALUE * 1.3 +
+          ')' +
+          'saturate(' +
+          NORMALIZE_VALUE * 2.4 +
+          ')' +
+          'sepia(' +
+          NORMALIZE_VALUE * 0.4 +
+          ')';
+        break;
+      default:
+        picture.style.filter = '';
+        break;
+    }
   }
 }
 

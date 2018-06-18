@@ -6,7 +6,7 @@ import Form from './form';
 
 function initializeFilters() {
   const uploadFilterControls = document.querySelector(
-    '.upload-filter-controls'
+    '.upload-filter__controls'
   );
 
   let filterMap;
@@ -37,7 +37,7 @@ function initializeFilters() {
 
     // Передает выбранный фильтр для включения/выключения ползунка изменения CSS фильтров
     Utils.switchFilterDisplay(selectedFilter);
-    initializeSaturate(filterMap[selectedFilter]);
+    initializeSaturate.onValueChanged(filterMap[selectedFilter]);
     // Класс перезаписывается, а не обновляется через classList потому что нужно
     // убрать предыдущий примененный класс. Для этого нужно или запоминать его
     // состояние или просто перезаписывать.
@@ -50,14 +50,15 @@ function initializeFilters() {
   );
 
   uploadFilterControls.addEventListener('keydown', evt => {
-    if (Utils.isEnterPressed(evt)) {
-      filterChangerEnter(evt);
+    if (!Utils.isEnterPressed(evt)) {
+      return;
     }
+    filterChangerEnter(evt);
   });
 
   const filterChangerClick = evt => {
     const currentFilterLabel = evt.target.parentNode;
-    if (currentFilterLabel.classList.contains('upload-filter-label')) {
+    if (currentFilterLabel.classList.contains('upload-filter__label')) {
       // Поддержка Edge
       if (currentFilterLabel.control) {
         currentFilterLabel.control.checked = true;
@@ -82,15 +83,19 @@ function initializeFilters() {
   };
 
   const changeAriaChecked = evt => {
-    const labelElements = evt.currentTarget.querySelectorAll(
-      '.upload-filter-label'
+    const labelElements = Array.from(
+      evt.currentTarget.querySelectorAll('.upload-filter__label')
     );
-    for (let i = 0; i < labelElements.length; i++) {
-      labelElements[i].attributes['aria-checked'].nodeValue = false;
-    }
+
+    labelElements.forEach(
+      element => (element.attributes['aria-checked'].nodeValue = false)
+    );
+
     if (Utils.isClicked(evt)) {
       evt.target.parentNode.attributes['aria-checked'].nodeValue = true;
-    } else if (Utils.isEnterPressed(evt)) {
+    }
+
+    if (Utils.isEnterPressed(evt)) {
       evt.preventDefault();
       evt.target.attributes['aria-checked'].nodeValue = true;
     }

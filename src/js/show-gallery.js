@@ -2,66 +2,114 @@
 
 import Utils from './utils';
 
-function showGallery(currentElement, miniElement) {
-  // переменные
-  const gallery = document.querySelector('.gallery-overlay');
-  const galleryPreview = gallery.querySelector('.gallery-overlay-preview');
-  const galleryPreviewImage = galleryPreview.querySelector(
-    '.gallery-overlay-image'
-  );
-  const galleryPreviewLikesCount = galleryPreview.querySelector('.likes-count');
-  const galleryPreviewCommentsCount = galleryPreview.querySelector(
-    '.comments-count'
-  );
-  const galleryCloseBtn = document.querySelector('.gallery-overlay-close');
+class Gallery {
+  constructor() {
+    // переменные
+    this.gallery = document.querySelector('.gallery-overlay');
+    this.activeIndexPicture = 0;
+    this.allPictures = [];
+    this.galleryPreview = this.gallery.querySelector(
+      '.gallery-overlay__preview'
+    );
+    this.galleryPreviewImage = this.galleryPreview.querySelector(
+      '.gallery-overlay__image'
+    );
+    this.galleryPreviewLikesCount = this.galleryPreview.querySelector(
+      '.gallery-overlay__likes-count'
+    );
+    this.galleryPreviewCommentsCount = this.galleryPreview.querySelector(
+      '.gallery-overlay__comments-count'
+    );
+    this.galleryCloseBtn = this.gallery.querySelector(
+      '.gallery-overlay__close'
+    );
+    this.galleryButtonPrev = this.galleryPreview.querySelector(
+      '.gallery-overlay__control--prev'
+    );
+    this.galleryButtonNext = this.galleryPreview.querySelector(
+      '.gallery-overlay__control--next'
+    );
+    this.galleryButtonNext.addEventListener('click', evt => {
+      this.showNextPicture(evt);
+    });
+    this.galleryButtonNext.addEventListener('keydown', evt =>
+      this.showNextPicture(evt)
+    );
+    this.galleryButtonPrev.addEventListener('click', evt => {
+      this.showPrevPicture(evt);
+    });
+    this.galleryButtonPrev.addEventListener('keydown', evt => {
+      this.showPrevPicture(evt);
+    });
 
+    this.galleryCloseBtn.addEventListener('click', evt => {
+      this.close(evt);
+    });
+
+    this.galleryCloseBtn.addEventListener('keydown', evt => {
+      if (Utils.isClickedOrIsEnterPressed(evt)) {
+        this.close(evt);
+      }
+    });
+
+    window.addEventListener('keydown', evt => {
+      if (Utils.isEscapePressed(evt)) {
+        this.close(evt);
+      }
+    });
+  }
+
+  setPictures(arrayData) {
+    this.allPictures = this.allPictures.concat(arrayData);
+  }
   /**
    * Закрывает галерею. Удаляет обработчики и ставит фокус на закрытой фотографии.
    * @param {Object} evt
    */
-  const closeGallery = evt => {
-    if (
-      !(
-        Utils.isEnterPressed(evt) ||
-        Utils.isClicked(evt) ||
-        Utils.isEscapePressed(evt)
-      )
-    ) {
-      return;
-    }
-
+  close(evt) {
     evt.preventDefault();
-    gallery.classList.add('invisible');
-    galleryCloseBtn.removeEventListener('click', closeGallery);
-    galleryCloseBtn.removeEventListener('keydown', closeGallery);
+    evt.stopPropagation();
+    this.gallery.classList.add('invisible');
+    this.activePicture.focus();
+  }
 
-    window.removeEventListener('keydown', closeGalleryEscapeHandler);
-    miniElement.focus();
-  };
+  setFocusOncloseButton() {
+    this.galleryCloseBtn.focus();
+  }
 
-  // показываем галерею, ставим фокус на кнопку закрытия
-  gallery.classList.remove('invisible');
-  galleryCloseBtn.focus();
+  show(currentElement, activePicture) {
+    // показываем галерею, ставим фокус на кнопку закрытия
+    this.gallery.classList.remove('invisible');
+    this.activeIndexPicture = this.allPictures.findIndex(
+      elem => elem === currentElement
+    );
+    this.activePicture = activePicture;
+    // рисуем превью
+    this.galleryPreviewImage.src = require(`../assets/${currentElement.url}`);
+    this.galleryPreviewLikesCount.innerHTML = currentElement.likes;
+    this.galleryPreviewCommentsCount.innerHTML = currentElement.comments;
+  }
 
-  // рисуем превью
-  galleryPreviewImage.src = require(`../assets/${currentElement.url}`);
-  galleryPreviewLikesCount.innerHTML = currentElement.likes;
-  galleryPreviewCommentsCount.innerHTML = currentElement.comments;
-
-  // вешаем обработчики закрытия галереи
-  galleryCloseBtn.addEventListener('click', evt => closeGallery(evt));
-
-  galleryCloseBtn.addEventListener('keydown', evt => closeGallery(evt));
-
-  window.addEventListener('keydown', evt => closeGalleryEscapeHandler(evt));
-
-  const closeGalleryEscapeHandler = evt => {
-    if (!Utils.isEscapePressed(evt)) {
+  showNextPicture(evt) {
+    if (!Utils.isClickedOrIsEnterPressed(evt)) {
       return;
     }
+    this.show(
+      this.allPictures[this.activeIndexPicture + 1] || this.allPictures[0]
+    );
+    this.setFocusOncloseButton();
+  }
 
-    closeGallery(evt);
-  };
+  showPrevPicture(evt) {
+    if (!Utils.isClickedOrIsEnterPressed(evt)) {
+      return;
+    }
+    this.show(
+      this.allPictures[this.activeIndexPicture - 1] ||
+        this.allPictures[this.allPictures.length - 1]
+    );
+    this.setFocusOncloseButton();
+  }
 }
 
-export default showGallery;
+export default new Gallery();

@@ -13,8 +13,6 @@ const WebpackChunkHash = require('webpack-chunk-hash');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CssoWebpackPlugin = require('csso-webpack-plugin').default;
-const CriticalPlugin = require('webpack-plugin-critical').CriticalPlugin;
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -64,89 +62,73 @@ module.exports = {
       inject: false,
       minify: PROD
         ? {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          keepClosingSlash: true,
-          minifyJS: true,
-          minifyCSS: true,
-          minifyURLs: true,
-        }
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          }
         : false,
     }),
-    // Extract vendor from app entry
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
+
     // DEV-only plugins
     ...(DEV
       ? [
-        // Enable source maps
-        new webpack.SourceMapDevToolPlugin(),
-        // Add module names to factory functions so they appear in browser profiler
-        new webpack.NamedModulesPlugin(),
-        // This is necessary to emit hot updates
-        new webpack.HotModuleReplacementPlugin(),
-        // Watcher doesn't work well if you mistype casing in a path so we use
-        // a plugin that prints an error when you attempt to do this
-        new CaseSensitivePathsPlugin(),
-        // If you require a missing module and then `npm install` it, you still have
-        // to restart the development server for Webpack to discover it. This plugin
-        // makes the discovery automatic so you don't have to restart
-        new WatchMissingNodeModulesPlugin(
-          path.resolve(__dirname, 'node_modules')
-        ),
-      ]
+          // Enable source maps
+          new webpack.SourceMapDevToolPlugin(),
+          // Add module names to factory functions so they appear in browser profiler
+          new webpack.NamedModulesPlugin(),
+          // This is necessary to emit hot updates
+          new webpack.HotModuleReplacementPlugin(),
+          // Watcher doesn't work well if you mistype casing in a path so we use
+          // a plugin that prints an error when you attempt to do this
+          new CaseSensitivePathsPlugin(),
+          // If you require a missing module and then `npm install` it, you still have
+          // to restart the development server for Webpack to discover it. This plugin
+          // makes the discovery automatic so you don't have to restart
+          new WatchMissingNodeModulesPlugin(
+            path.resolve(__dirname, 'node_modules')
+          ),
+        ]
       : []),
     // PROD-only plugins
     ...(PROD
       ? [
-        // Concatenate the scope of all modules (less wrapper functions)
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        // Optimize hashes
-        new webpack.HashedModuleIdsPlugin(),
-        new WebpackChunkHash(),
-        // Generate a manifest file which contains a mapping of all asset filenames
-        // to their corresponding output file so that tools can pick it up
-        new ManifestPlugin({ fileName: 'asset-manifest.json' }),
-        // Minify the code.
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: false,
-            // Disabled because of an issue with Uglify breaking seemingly valid code:
-            // https://github.com/facebookincubator/create-react-app/issues/2376
-            // Pending further investigation:
-            // https://github.com/mishoo/UglifyJS2/issues/2011
-            comparisons: false,
-          },
-          output: {
-            comments: false,
-            // Turned on because emoji and regex is not minified properly using default
-            // https://github.com/facebookincubator/create-react-app/issues/2488
-            ascii_only: true,
-          },
-        }),
-        // Copy statid dir to build
-        new CopyWebpackPlugin([path.resolve(__dirname, 'static')]),
-        // Extract css to separate file
-        new ExtractTextPlugin('css/[name].[contenthash:8].css'),
-        new CssoWebpackPlugin({
-          debug: true,
-          forceMediaMerge: true,
-          structureMinimazation: true,
-          comments: false,
-        }),
-        new CriticalPlugin({
-          src: 'index.html',
-          inline: true,
-          minify: true,
-          dest: 'index.html',
-          ignore: ['@font-face', /url\(/],
-        }),
-      ]
+          // Concatenate the scope of all modules (less wrapper functions)
+          new webpack.optimize.ModuleConcatenationPlugin(),
+          // Optimize hashes
+          new webpack.HashedModuleIdsPlugin(),
+          new WebpackChunkHash(),
+          // Generate a manifest file which contains a mapping of all asset filenames
+          // to their corresponding output file so that tools can pick it up
+          new ManifestPlugin({ fileName: 'asset-manifest.json' }),
+          // Minify the code.
+          new webpack.optimize.UglifyJsPlugin({
+            compress: {
+              warnings: false,
+              // Disabled because of an issue with Uglify breaking seemingly valid code:
+              // https://github.com/facebookincubator/create-react-app/issues/2376
+              // Pending further investigation:
+              // https://github.com/mishoo/UglifyJS2/issues/2011
+              comparisons: false,
+            },
+            output: {
+              comments: false,
+              // Turned on because emoji and regex is not minified properly using default
+              // https://github.com/facebookincubator/create-react-app/issues/2488
+              ascii_only: true,
+            },
+          }),
+          // Copy statid dir to build
+          new CopyWebpackPlugin([path.resolve(__dirname, 'static')]),
+          // Extract css to separate file
+          new ExtractTextPlugin('css/[name].[contenthash:8].css'),
+        ]
       : []),
   ],
   module: {
@@ -171,23 +153,23 @@ module.exports = {
             exclude: /node_modules/,
             use: DEV
               ? [
-                { loader: 'style-loader', options: { sourceMap: true } },
-                {
-                  loader: 'css-loader',
-                  options: { importLoaders: 1, sourceMap: true },
-                },
-                { loader: 'postcss-loader', options: { sourceMap: true } },
-              ]
-              : ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [
+                  { loader: 'style-loader', options: { sourceMap: true } },
                   {
                     loader: 'css-loader',
-                    options: { importLoaders: 1 },
+                    options: { importLoaders: 1, sourceMap: true },
                   },
-                  'postcss-loader',
-                ],
-              }),
+                  { loader: 'postcss-loader', options: { sourceMap: true } },
+                ]
+              : ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: [
+                    {
+                      loader: 'css-loader',
+                      options: { importLoaders: 1, minimize: true },
+                    },
+                    'postcss-loader',
+                  ],
+                }),
           },
           {
             test: /\.raw\.svg$/i,

@@ -1,0 +1,52 @@
+/* Кадрирование */
+.upload-resize__controls {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+
+  border: 0;
+  transform: translateX(-50%);
+}
+
+.upload-resize__control {
+  width: 33px;
+  height: 33px;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 33px;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  vertical-align: top;
+  text-align: center;
+  color: white;
+
+  background-color: color-mod(black alpha(56%));
+  border: 0;
+}
+
+.upload-resize__controls-value {
+  width: 60px;
+
+  font-size: 16px;
+
+  border: 1px solid color-mod(white alpha(50%));
+  border-width: 0 1px;
+}
+
+.upload-resize__controls-button {
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.upload-resize__controls-button--dec {
+  line-height: 20px;
+
+  border-radius: 50% 0 0 50%;
+}
+
+.upload-resize__controls-button--inc {
+  border-radius: 0 50% 50% 0;
+}

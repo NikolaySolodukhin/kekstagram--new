@@ -13,7 +13,7 @@ class Form {
 
     this.uploadOverlay = document.querySelector('.upload-overlay');
     this.uploadFormCancel = this.uploadOverlay.querySelector(
-      '.upload-form-cancel'
+      '.upload-form__cancel'
     );
     this.uploadFromBtn = this.uploadForm.querySelector('.upload-file');
 

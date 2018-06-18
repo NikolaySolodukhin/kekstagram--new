@@ -7,24 +7,26 @@ function createScale(
   filterImageStyle
 ) {
   const buttonInc = element.parentNode.querySelector(
-    '.upload-resize-controls-button-inc'
+    '.upload-resize__controls-button--inc'
   );
   const buttonDec = element.parentNode.querySelector(
-    '.upload-resize-controls-button-dec'
+    '.upload-resize__controls-button--dec'
   );
 
   element.value = resizeInitialValue + '%';
 
   buttonDec.addEventListener('click', () => {
-    if (element.value !== resizeStep + '%') {
-      changeValue(-resizeStep);
+    if (element.value === resizeStep + '%') {
+      return;
     }
+    changeValue(-resizeStep);
   });
 
   buttonInc.addEventListener('click', () => {
-    if (element.value !== resizeInitialValue + '%') {
-      changeValue(resizeStep);
+    if (element.value === resizeInitialValue + '%') {
+      return;
     }
+    changeValue(resizeStep);
   });
 
   /**
@@ -32,10 +34,12 @@ function createScale(
    * @param {Number} step
    */
   const changeValue = step => {
-    element.value = parseInt(element.value, 10) + step + '%';
-    if (typeof filterImageStyle === 'function') {
-      filterImageStyle(element.value, resizeInitialValue);
+    if (typeof filterImageStyle !== 'function') {
+      return;
     }
+
+    element.value = parseInt(element.value, 10) + step + '%';
+    filterImageStyle(element.value, resizeInitialValue);
   };
 }
 
